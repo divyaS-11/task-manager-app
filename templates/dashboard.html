@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Dashboard</h3>
+<center><h4>Welcome, {{ current_user.username }}!</h4>
+</center>
+<hr>
+
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.status }}</td>
+        <td>
+            <a href="/complete/{{ task.id }}">Complete</a> |
+          <a href="{{ url_for('edit', id=task.id) }}">Edit</a> |
+
+            <a href="/delete/{{ task.id }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table><br><br>
+<center>
+<div class="actions">
+    <a href="/add_task" class="btn-add">➕ Add Task</a>
+    <a href="/logout" class="btn-logout">🚪 Logout</a>
+</div>
+
+</center>
+
+{% endblock %}
